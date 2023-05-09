@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ member.name }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" 
+    type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div>
+        <a href="{{ url_for('index') }}">Main Page</a>
+        <a href="{{ url_for('about') }}">About App</a>
+    </div>
+    <h3>
+        <img src="{{ url_for('static', filename='img/logo.png') }}" width="50">
+        {{ member.name }}
+    </h3>
+
+    <ul>
+        {% for task in member.tasks %}
+        <li>{{ task }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('add_task') }}" method="post">
+        <input type="text" name="task" placeholder="Add new task">
+        <input type="hidden" name="pk" value="{{ member.id }}">
+        <input type="submit" value="Do">
+    </form>
+
+</body>
+</html>
